@@ -13,16 +13,21 @@ struct Cli {
     path: PathBuf,
 }
 
-fn main() {
-    let path = &Cli::parse().path;
-    let metadata = fs::symlink_metadata(Path::new(path.absolutize().unwrap().to_str().unwrap())).unwrap();
-    let is_symlink = metadata.is_symlink();
+fn main() -> std::io::Result<()> {
+    let p = Cli::parse().path;
+    let metadata =
+        fs::symlink_metadata(Path::new(p.absolutize().unwrap().to_str().unwrap())).unwrap();
 
-    if is_symlink {
-        println!("YES");
+    let answer: String = String::from(match metadata.is_symlink() {
+        true => "",
+        false => " not" ,
+    });
 
-        return;
-    }
+    println!(
+        "Path {} is{} a symbolic link.",
+        p.absolutize().unwrap().to_str().unwrap(),
+        answer
+    );
 
-    println!("NO")
+    Ok(())
 }

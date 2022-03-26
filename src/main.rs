@@ -20,7 +20,7 @@ fn main() -> std::io::Result<()> {
 
     let answer: String = String::from(match metadata.is_symlink() {
         true => "",
-        false => " not" ,
+        false => " not",
     });
 
     println!(

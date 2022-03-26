@@ -1,5 +1,7 @@
 use clap::Parser;
-use std::path::PathBuf;
+use path_absolutize::*;
+use std::fs;
+use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
 #[clap(name = "Teleport Dir")]
@@ -12,7 +14,15 @@ struct Cli {
 }
 
 fn main() {
-    let cli = Cli::parse();
+    let path = &Cli::parse().path;
+    let metadata = fs::symlink_metadata(Path::new(path.absolutize().unwrap().to_str().unwrap())).unwrap();
+    let is_symlink = metadata.is_symlink();
 
-    println!("Your argument reads: {:?}", cli.path);
+    if is_symlink {
+        println!("YES");
+
+        return;
+    }
+
+    println!("NO")
 }

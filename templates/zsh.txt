@@ -1,0 +1,5 @@
+function {{cmd}}()
+{
+  \ builtin cd $(teleport-dir teleport "$@")
+}
+

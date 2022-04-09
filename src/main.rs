@@ -3,6 +3,7 @@ use path_absolutize::*;
 use std::fs::{metadata, symlink_metadata, canonicalize};
 use std::io::Result;
 use std::path::{Path, PathBuf};
+use askama::Template;
 
 #[derive(Parser)]
 #[clap(
@@ -25,8 +26,14 @@ pub struct Teleport {
 
 #[derive(Parser)]
 pub struct Init {
-    #[clap(long)]
+    #[clap(short, long, default_value = "td")]
     cmd: String,
+}
+
+#[derive(Template)]
+#[template(path = "zsh.txt")]
+struct ShellTemplate<'a> {
+    cmd: &'a str,
 }
 
 fn main() -> Result<()> {
@@ -69,7 +76,9 @@ impl Run for Teleport {
 
 impl Run for Init {
     fn run(&self) -> Result<()> {
-        println!("{}", Init::parse().cmd);
+        let zsh = ShellTemplate { cmd: &self.cmd };
+
+        println!("{}", zsh.render().unwrap());
 
         Ok(())
     }

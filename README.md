@@ -67,4 +67,7 @@ td /usr/local/Cellar/php@8.0/8.0.17/bin/
 This project is mainly just an excercise while I'm trying to learn Rust, and I have learned a lot by looking at other crate's I use or do similar things. 
 When trying to solve the issue you can't change a directory in your main shell from a Rust command, I have taken a lot (or most) of the idea from looking at [zoxide](https://github.com/ajeetdsouza/zoxide).
 
+## License 
+
+This composer package is an open-sourced software licensed under the [MIT License](https://github.com/jascha030/teleport-dir/blob/master/LICENSE)
 

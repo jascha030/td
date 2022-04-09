@@ -1,5 +1,5 @@
-function {{cmd}}()
+function {{ cmd }} ()
 {
-  \ builtin cd $(teleport-dir teleport "$@")
+  \builtin cd $(teleport-dir teleport "$@")
 }
 

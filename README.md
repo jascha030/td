@@ -62,4 +62,9 @@ td /usr/local/Cellar/php@8.0/8.0.17/bin/php
 td /usr/local/Cellar/php@8.0/8.0.17/bin/
 ```
 
+## Credits 
+
+This project is mainly just an excercise while I'm trying to learn Rust, and I have learned a lot by looking at other crate's I use or do similar things. 
+When trying to solve the issue you can't change a directory in your main shell from a Rust command, I have taken a lot (or most) of the idea from looking at [zoxide](https://github.com/ajeetdsouza/zoxide).
+
 

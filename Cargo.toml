@@ -1,7 +1,16 @@
 [package]
 name = "teleport-dir"
+description = "Simple rust command to navigate into the origin dir of a symlinked file."
 version = "0.1.0"
+authors = ["Jascha van Aalst"]
+repository = "https://github.com/jascha030/teleport-dir"
+homepage = "https://github.com/jascha030/teleport-dir"
 edition = "2021"
+license = "MIT"
+license_file = "LICENSE"
+keywords = ["zsh", "symlink", "cd", "teleport", "directory"]
+categories = ["command-line-utilities"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

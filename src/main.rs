@@ -1,5 +1,7 @@
+mod command;
 use clap::Parser;
-use teleport_dir::{Command, TeleportError, Run};
+use crate::command::{Command, Run};
+use crate::command::error::TeleportError;
 
 fn main() -> Result<(), TeleportError> {
     return match Command::parse().run() {

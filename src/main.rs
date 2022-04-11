@@ -1,7 +1,9 @@
 use clap::Parser;
-use std::io::Result;
-use teleport_dir::{Command, Run};
+use teleport_dir::{Command, TeleportError, Run};
 
-fn main() -> Result<()> {
-    Command::parse().run()
+fn main() -> Result<(), TeleportError> {
+    return match Command::parse().run() {
+        Ok(_) => Ok(()),
+        Err(e) => Err(TeleportError::new(&e.to_string())),
+    };
 }

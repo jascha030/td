@@ -1,9 +1,11 @@
 use askama::Template;
 use clap::Parser;
 use path_absolutize::*;
-use std::fs::{metadata, symlink_metadata, canonicalize};
-use std::path::{Path, PathBuf};
+use std::error::Error;
+use std::fmt::{Display, Formatter};
+use std::fs::{canonicalize, metadata, symlink_metadata};
 use std::io::Result;
+use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
 #[clap(
@@ -58,7 +60,7 @@ impl Run for Teleport {
             true => canonicalize(p)?,
             false => p.absolutize().unwrap().to_path_buf(),
         };
-            
+
         change_path = match metadata(&change_path).unwrap().is_file() {
             true => change_path.clone().parent().unwrap().to_path_buf(),
             false => change_path,
@@ -77,5 +79,30 @@ impl Run for Init {
         println!("{}", zsh.render().unwrap());
 
         Ok(())
+    }
+}
+
+#[derive(Debug)]
+pub struct TeleportError {
+    details: String,
+}
+
+impl TeleportError {
+    pub fn new(msg: &str) -> TeleportError {
+        TeleportError {
+            details: msg.to_string(),
+        }
+    }
+}
+
+impl Display for TeleportError {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
+        write!(f, "{}", self.details)
+    }
+}
+
+impl Error for TeleportError {
+    fn description(&self) -> &str {
+        &self.details
     }
 }
